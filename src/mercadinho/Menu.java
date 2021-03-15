@@ -5,6 +5,7 @@
  */
 package mercadinho;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -14,16 +15,16 @@ import java.util.Scanner;
 public class Menu {
   static void menuPrincipal() {
     Scanner teclado = new Scanner(System.in);
-    System.out.println("Escolha uma das opções: " );
-    System.out.println("1- Cadastro de Produto");
+    System.out.println("---- MENU PRINCIPAL ----" );
+    System.out.println("Escolha uma das opções:" );
+    System.out.println("1- Produtos");
     System.out.println("2- Realizar Venda");
     System.out.println("0- Sair do sistema");
-
     String opmenu = teclado.nextLine();
  
     switch (Integer.parseInt(opmenu)) {
       case 1:
-        cadastro();
+        menuProdutos();
         break;
       case 2:
         venda();
@@ -37,22 +38,39 @@ public class Menu {
     }    
   }
   
-  static void cadastro() {
+  static void menuProdutos(){
     Scanner teclado = new Scanner(System.in);
-    System.out.print("Nome do produto: ");
-    String nome = teclado.nextLine();
-    System.out.print("Valor: ");
-    String valor = teclado.nextLine();
-    System.out.print("Categoria: ");
-    String categoria = teclado.nextLine();
+    System.out.println("---- PRODUTOS ----" );
+    System.out.println("1- Listar todos");
+    System.out.println("2- Cadastrar");
+    System.out.println("3- Editar");
+    System.out.println("4- Mostar");
+    System.out.println("5- Apagar");
+    System.out.println("0- Voltar ao menu principal");
+    String opmenu = teclado.nextLine();
     
-    Produto produto = new Produto(nome, valor, categoria);
-        
+    switch (Integer.parseInt(opmenu)) {
+      case 1:
+        try{ 
+            Produto.listarTodos();
+        }catch(Exception e){}
+        break;
+      case 2:
+        try{
+            Produto.cadastrar();
+        }catch(Exception e){}
+        break;
+      case 0:
+        menuPrincipal();
+        break;
+      default:
+        System.out.println("Escolha uma opção válida");
+        menuProdutos();
+    }   
     menuPrincipal();
   }
   
   static void venda() {
     System.out.println("Vc entrou na venda");
-  }
-    
+  }    
 }

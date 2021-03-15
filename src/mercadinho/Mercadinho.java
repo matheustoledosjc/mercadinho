@@ -5,19 +5,9 @@
  */
 package mercadinho;
 
-/**
- *
- * @author MatheusToledo
- */
 public class Mercadinho {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Menu menu = new Menu();
-        menu.menuPrincipal();
+    public static void main(String[] args) throws Exception {
+//        ConexaoBancoDados.criarConexao();
+        Menu.menuPrincipal();
     }
-    
 }
