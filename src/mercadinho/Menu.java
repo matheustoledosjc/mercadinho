@@ -5,7 +5,6 @@
  */
 package mercadinho;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Scanner;
  * @author MatheusToledo
  */
 public class Menu {
-  static void menuPrincipal() {
+  static void menuPrincipal() throws Exception {
     Scanner teclado = new Scanner(System.in);
     System.out.println("---- MENU PRINCIPAL ----" );
     System.out.println("Escolha uma das opções:" );
@@ -27,7 +26,7 @@ public class Menu {
         menuProdutos();
         break;
       case 2:
-        venda();
+        menuVenda();
         break;
       case 0:
         System.out.println("Sistema encerrado!");
@@ -38,7 +37,7 @@ public class Menu {
     }    
   }
   
-  static void menuProdutos(){
+  static void menuProdutos() throws Exception{
     Scanner teclado = new Scanner(System.in);
     System.out.println("---- PRODUTOS ----" );
     System.out.println("1- Listar todos");
@@ -60,17 +59,33 @@ public class Menu {
             Produto.cadastrar();
         }catch(Exception e){}
         break;
+      case 3:
+        try{
+            Produto.editar();
+        }catch(Exception e){}
+        break;
+      case 4:
+        try{
+            Produto.mostrar();
+        }catch(Exception e){}
+        break;
+      case 5:
+        try{
+            Produto.deletar();
+        }catch(Exception e){}
+        break;          
       case 0:
         menuPrincipal();
         break;
       default:
         System.out.println("Escolha uma opção válida");
         menuProdutos();
-    }   
-    menuPrincipal();
+    }
   }
   
-  static void venda() {
-    System.out.println("Vc entrou na venda");
+  static void menuVenda() throws Exception {
+    try{
+        Venda.realizarVenda();
+    } catch(Exception e){}
   }    
 }
