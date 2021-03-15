@@ -24,6 +24,8 @@ public class Produto {
     private String descricao;
     private float valor_compra;
     private float valor_venda;
+    private Float getValorCompra;
+    private Float getValorVenda;
     
     Produto(String descricao, Float valor_compra, Float valor_venda) {
         setDescricao(descricao);
@@ -66,12 +68,12 @@ public class Produto {
         }
     }
     
-    public static List<Produto> listarTodos() throws Exception{
+    public static void listarTodos() throws Exception{
         String sql = "SELECT * FROM produtos";
-        List<Produto> produtos = new ArrayList<Produto>();
-        Connection conn = null;       
+        List<Produto> produtos;
+        produtos = new ArrayList<>();   
         try{
-            conn = ConexaoBancoDados.criarConexao();
+            Connection conn = (Connection) ConexaoBancoDados.criarConexao();
             PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rset = pstm.executeQuery();
             while (rset.next()) {
@@ -83,11 +85,21 @@ public class Produto {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-        }        
-        return produtos;
+        }
+        System.out.println("---- LISTA DE PRODUTOS ----");
+        produtos.forEach(p -> {
+            System.out.println("DESCRICAO: "+p.getDescricao()+" VALOR DE COMPRA: "+p.getValorCompra()+" VALOR DE VENDA: "+p.getValorVenda()+" MARGEM DE LUCRO: "+p.margemLucro());
+        });
+    }
+    
+    public Float margemLucro(){
+        return this.getValorVenda() - this.getValorCompra();
     }
     
     //SETERS
+    public void setId(int id){
+        this.id = id;
+    }    
     public void setDescricao(String descricao){
         this.descricao = descricao;
     }

@@ -7,7 +7,18 @@ package mercadinho;
 
 public class Mercadinho {
     public static void main(String[] args) throws Exception {
-//        ConexaoBancoDados.criarConexao();
         Menu.menuPrincipal();
     }
+//    public static void main(String[] args) throws Exception {
+//        Usuario u;
+//        Administrador admin;
+//        OperadorCaixa opc;
+//        
+//        u = new Usuario();
+//        admin = new Administrador();
+//        opc = new OperadorCaixa();
+//        
+//        admin.editarCadastros();
+//        opc.realizarVenda();
+//    }
 }
